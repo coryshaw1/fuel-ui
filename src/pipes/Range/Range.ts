@@ -10,12 +10,18 @@ import {NgModule, Pipe, PipeTransform} from '@angular/core';
     pure: false
 })
 export class RangePipe implements PipeTransform {
-    transform(value:any, min: number = 0, max: number = 4, step: number = 1){
-        
-        var newValue:any[] = [];
+    transform(value: any, min: number = 0, max: number = 4, step: number = 1){
 
-        for (var i = min; i <= max; i += step)
+        let newValue: any[] = [];
+
+        if(step == 0) 
+            return newValue;
+
+        for (let i = step > 0 ? min : max;
+            step > 0 ? i <= max : i >= min;
+            i += step) {
             newValue.push(i);
+        }
 
         return newValue;
     }
